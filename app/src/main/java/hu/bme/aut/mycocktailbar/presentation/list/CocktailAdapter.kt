@@ -4,14 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import hu.bme.aut.mycocktailbar.R
 import hu.bme.aut.mycocktailbar.databinding.ItemCocktailBinding
+import hu.bme.aut.mycocktailbar.model.ResultModel
 
 class CocktailAdapter(private val listener: OnCocktailSelectedListener) : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>() {
-    private val cocktails: MutableList<String> = ArrayList()
+    private val cocktails: MutableList<ResultModel> = ArrayList()
 
     interface OnCocktailSelectedListener {
-        fun onCocktailSelected(cocktail: String?)
+        fun onCocktailSelected(cocktail: ResultModel?)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CocktailViewHolder {
@@ -26,7 +28,7 @@ class CocktailAdapter(private val listener: OnCocktailSelectedListener) : Recycl
 
     override fun getItemCount(): Int = cocktails.size
 
-    fun addCocktail(newCocktail: String) {
+    fun addCocktail(newCocktail: ResultModel) {
         cocktails.add(newCocktail)
         notifyItemInserted(cocktails.size - 1)
     }
@@ -41,16 +43,17 @@ class CocktailAdapter(private val listener: OnCocktailSelectedListener) : Recycl
 
     inner class CocktailViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
         var binding = ItemCocktailBinding.bind(itemView)
-        var item: String? = null
+        var item: ResultModel? = null
 
         init {
             binding.root.setOnClickListener { listener.onCocktailSelected(item) }
         }
 
-        fun bind(newCocktail: String?) {
+        fun bind(newCocktail: ResultModel?) {
             item = newCocktail
             // TODO bindings
-            //binding.CityItemNameTextView.text = item
+            binding.CocktailItemNameTextView.text = newCocktail?.name
+            Picasso.get().load(item?.imgUrl).into(binding.ivIcon)
         }
     }
 }
