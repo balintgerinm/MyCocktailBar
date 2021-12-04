@@ -9,8 +9,10 @@ import hu.bme.aut.mycocktailbar.R
 import hu.bme.aut.mycocktailbar.databinding.ItemCocktailBinding
 import hu.bme.aut.mycocktailbar.model.ResultModel
 
-class CocktailAdapter(private val listener: OnCocktailSelectedListener) : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>() {
-    private val cocktails: MutableList<ResultModel> = ArrayList()
+class CocktailAdapter(private val listener: OnCocktailSelectedListener)
+    : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>() {
+
+    private val cocktails: MutableList<ResultModel> = mutableListOf()
 
     interface OnCocktailSelectedListener {
         fun onCocktailSelected(cocktail: ResultModel?)

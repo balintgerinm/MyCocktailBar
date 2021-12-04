@@ -1,5 +1,6 @@
 package hu.bme.aut.mycocktailbar.presentation.list
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,8 @@ class CocktailListActivity : AppCompatActivity(),
 
     private lateinit var binding: ActivityCocktaillistBinding
     private lateinit var adapter: CocktailAdapter
+
+    private lateinit var data: MutableList<ResultModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +34,9 @@ class CocktailListActivity : AppCompatActivity(),
         binding.rwCocktail.layoutManager = LinearLayoutManager(this)
         adapter = CocktailAdapter(this)
 
-        adapter.addCocktail(ResultModel(1, "https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg", "mojito"))
-        adapter.addCocktail(ResultModel(148, "https://www.thecocktaildb.com/images/media/drink/vqyxqx1472669095.jpg", "gin tonic"))
-        adapter.addCocktail(ResultModel(197, "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg", "margerita"))
+        adapter.addCocktail(ResultModel("mojito", "https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg", 1))
+        adapter.addCocktail(ResultModel("gin tonic", "https://www.thecocktaildb.com/images/media/drink/vqyxqx1472669095.jpg", 148))
+        adapter.addCocktail(ResultModel("margerita", "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg", 197))
 
         binding.rwCocktail.adapter = adapter
     }
@@ -46,7 +49,10 @@ class CocktailListActivity : AppCompatActivity(),
         adapter.addCocktail(cocktail!!)
     }
 
-    override fun onCocktailSearched() {
-
+    override fun onCocktailSearched(ingredient: String?) {
+        val searchIntent = Intent()
+        searchIntent.setClass(this@CocktailListActivity ,NetworkListActivity::class.java)
+        searchIntent.putExtra(NetworkListActivity.EXTRA_INGREDIENT, ingredient)
+        startActivity(searchIntent)
     }
 }

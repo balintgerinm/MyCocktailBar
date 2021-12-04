@@ -15,6 +15,9 @@
             android:name=".presentation.cocktail.CocktailActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.list.NetworkListActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.list.CocktailListActivity"
             android:exported="true">
             <intent-filter>

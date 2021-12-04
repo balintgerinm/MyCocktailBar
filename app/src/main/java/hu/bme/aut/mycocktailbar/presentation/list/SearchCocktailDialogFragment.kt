@@ -15,9 +15,7 @@ class SearchCocktailDialogFragment : AppCompatDialogFragment() {
     private lateinit var listener: SearchCocktailDialogListener
 
     interface SearchCocktailDialogListener {
-        //fun onCityAdded(city: String?)
-        // TODO search
-        fun onCocktailSearched()
+        fun onCocktailSearched(ingredient: String?)
     }
 
     override fun onAttach(context: Context) {
@@ -41,8 +39,7 @@ class SearchCocktailDialogFragment : AppCompatDialogFragment() {
             .setView(binding.root)
             .setPositiveButton(R.string.ok) { _, _ ->
                 listener.onCocktailSearched(
-                    // TODO http
-                    //binding.NewCityDialogEditText.text.toString()
+                    binding.SearchCocktailDialogEditText.text.toString()
                 )
             }
             .setNegativeButton(R.string.cancel, null)
