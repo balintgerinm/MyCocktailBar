@@ -5,6 +5,7 @@ import android.os.Looper
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import hu.bme.aut.mycocktailbar.model.ApiResult
+import hu.bme.aut.mycocktailbar.model.CocktailResult
 import hu.bme.aut.mycocktailbar.model.ResultModel
 import retrofit2.Retrofit
 import retrofit2.Call
@@ -52,5 +53,14 @@ class CocktailInteractor {
     ) {
         val getByIngredientsRequest = cocktailApi.getByIngredient(ingredient)
         runCallOnBackgroundThread(getByIngredientsRequest, onSuccess, onError)
+    }
+
+    fun getById(
+        cocktailId: String,
+        onSuccess: (CocktailResult) -> Unit,
+        onError: (Throwable) -> Unit
+    ) {
+        val getByIdRequest = cocktailApi.getById(cocktailId)
+        runCallOnBackgroundThread(getByIdRequest, onSuccess, onError)
     }
 }
