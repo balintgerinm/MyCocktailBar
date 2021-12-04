@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyCocktailBar">
         <activity
-            android:name=".CocktailListActivity"
+            android:name=".presentation.cocktail.CocktailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.list.CocktailListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
