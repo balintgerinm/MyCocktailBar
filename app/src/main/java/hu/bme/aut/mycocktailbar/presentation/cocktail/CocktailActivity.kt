@@ -3,11 +3,14 @@ package hu.bme.aut.mycocktailbar.presentation.cocktail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.firestore.DocumentChange
 import hu.bme.aut.mycocktailbar.R
 import hu.bme.aut.mycocktailbar.databinding.ActivityCocktailBinding
 import hu.bme.aut.mycocktailbar.model.CocktailResult
 import hu.bme.aut.mycocktailbar.data_access.CocktailInteractor
 import hu.bme.aut.mycocktailbar.adapter.CocktailPagerAdapter
+import hu.bme.aut.mycocktailbar.data_layer.db.DataBase
+import hu.bme.aut.mycocktailbar.model.CocktailModel
 
 class CocktailActivity : AppCompatActivity() {
 
@@ -16,7 +19,8 @@ class CocktailActivity : AppCompatActivity() {
     private lateinit var cocktail: CocktailResult
 
     private lateinit var cocktailPagerAdapter: CocktailPagerAdapter
-
+    private lateinit var interactor: CocktailInteractor
+    private lateinit var savedCocktail: CocktailResult
     companion object {
         private const val TAG = "CocktailActivity"
         const val EXTRA_COCKTAIL_ID = "extra.cocktail_id"
@@ -27,16 +31,25 @@ class CocktailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCocktailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         cocktailId = intent.getStringExtra(EXTRA_COCKTAIL_ID).toString()
-
         supportActionBar?.title = intent.getStringExtra(EXTRA_COCKTAIL_NAME)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        interactor = CocktailInteractor()
+        val bundle = intent.getBundleExtra("Bundle")
+        val saved = bundle?.getParcelable<CocktailModel>("key")
+        if (saved != null)
+            savedCocktail = CocktailResult(listOf(saved))
     }
 
     override fun onResume() {
         super.onResume()
-        loadCocktailData()
+        if (savedCocktail.drinks.isEmpty()) {
+            loadCocktailData()
+        }
+        else {
+            initFragments(savedCocktail)
+        }
+
     }
 
     private fun loadCocktailData() {
@@ -60,5 +73,4 @@ class CocktailActivity : AppCompatActivity() {
     private fun showError(e: Throwable) {
         e.printStackTrace()
     }
-
 }

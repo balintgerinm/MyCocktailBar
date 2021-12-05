@@ -31,7 +31,7 @@ class NetworkListActivity: AppCompatActivity(),
         setContentView(binding.root)
 
         ingredient = intent.getStringExtra(EXTRA_INGREDIENT).toString()
-        adapter = CocktailAdapter(this)
+        adapter = CocktailAdapter(this, 1)
         binding.rwCocktailNetwork.adapter = adapter
         binding.rwCocktailNetwork.layoutManager = LinearLayoutManager(this)
     }

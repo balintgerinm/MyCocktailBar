@@ -27,11 +27,13 @@ class DataBase {
         }
 
     fun createCocktail(cocktailToSave: CocktailModel) {
-        cocktails?.add(cocktailToSave)?.addOnSuccessListener {
-            documentReference -> Log.d(TAG, "Cocktail added with ID: ${documentReference.id}")
-        }
+        cocktails?.document(cocktailToSave.cocktailId.toString())
+            ?.set(cocktailToSave.toHashMap())
+            ?.addOnSuccessListener {
+                Log.d(TAG, "Cocktail added")
+            }
             ?.addOnFailureListener {
-                error -> Log.w(TAG, "Error adding track", error)
+                error -> Log.w(TAG, "Error adding", error)
             }
     }
 
@@ -45,10 +47,22 @@ class DataBase {
             ?.document(cocktailId)
             ?.delete()
             ?.addOnSuccessListener {
-                Log.d(TAG, "Track deleted with ID: $cocktailId")
+                Log.d(TAG, "Cocktail deleted")
             }
             ?.addOnFailureListener { error ->
-                Log.w(TAG, "Error deleting track", error)
+                Log.w(TAG, "Error deleting", error)
             }
     }
+
+    /*fun getCocktail(cocktailId: String, function: (CocktailModel) -> (Unit)) {
+        cocktails
+            ?.document(cocktailId)
+            ?.get()
+            ?.addOnSuccessListener {
+
+            }
+            ?.addOnFailureListener { error ->
+                Log.w(TAG, "Error finding", error)
+            }
+    }*/
 }
