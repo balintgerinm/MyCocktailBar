@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import hu.bme.aut.mycocktailbar.databinding.ActivityCocktaillistBinding
 import hu.bme.aut.mycocktailbar.model.ResultModel
+import hu.bme.aut.mycocktailbar.presentation.fragments.SearchCocktailDialogFragment
+import hu.bme.aut.mycocktailbar.adapter.CocktailAdapter
+import hu.bme.aut.mycocktailbar.presentation.cocktail.CocktailActivity
 
 class CocktailListActivity : AppCompatActivity(),
     CocktailAdapter.OnCocktailSelectedListener,
@@ -14,7 +17,7 @@ class CocktailListActivity : AppCompatActivity(),
     private lateinit var binding: ActivityCocktaillistBinding
     private lateinit var adapter: CocktailAdapter
 
-    private lateinit var data: MutableList<ResultModel>
+    //private lateinit var data: MutableList<ResultModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,15 +37,19 @@ class CocktailListActivity : AppCompatActivity(),
         binding.rwCocktail.layoutManager = LinearLayoutManager(this)
         adapter = CocktailAdapter(this)
 
-        adapter.addCocktail(ResultModel("mojito", "https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg", 1))
-        adapter.addCocktail(ResultModel("gin tonic", "https://www.thecocktaildb.com/images/media/drink/vqyxqx1472669095.jpg", 148))
-        adapter.addCocktail(ResultModel("margerita", "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg", 197))
+        adapter.addCocktail(ResultModel("mojito", "https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg", 10017))
+        adapter.addCocktail(ResultModel("gin tonic", "https://www.thecocktaildb.com/images/media/drink/vqyxqx1472669095.jpg", 10048))
+        adapter.addCocktail(ResultModel("margerita", "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg", 10097))
 
         binding.rwCocktail.adapter = adapter
     }
 
     override fun onCocktailSelected(cocktail: ResultModel?) {
-        // Todo: Start DetailsActivity with the selected cocktail
+        val showCocktailIntent = Intent()
+        showCocktailIntent.setClass(this@CocktailListActivity, CocktailActivity::class.java)
+        showCocktailIntent.putExtra(CocktailActivity.EXTRA_COCKTAIL_ID, cocktail?.cocktailId.toString())
+        showCocktailIntent.putExtra(CocktailActivity.EXTRA_COCKTAIL_NAME, cocktail?.name)
+        startActivity(showCocktailIntent)
     }
 
     fun onCocktailAdded(cocktail: ResultModel?) {

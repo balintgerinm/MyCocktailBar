@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">MyCocktailBar</string>
     <string name="remove">Remove</string>
-    <string name="search_hint">Type here the keyword</string>
-    <string name="search_cocktail">Search by name or ingredient</string>
+    <string name="search_hint">Type here the ingredient</string>
+    <string name="search_cocktail">Search by ingredient</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="main">Ingredients</string>
+    <string name="details">Instructions</string>
 </resources>

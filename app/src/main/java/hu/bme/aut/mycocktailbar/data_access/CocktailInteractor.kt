@@ -1,4 +1,4 @@
-package hu.bme.aut.mycocktailbar.network
+package hu.bme.aut.mycocktailbar.data_access
 
 import android.os.Handler
 import android.os.Looper
@@ -6,12 +6,11 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import hu.bme.aut.mycocktailbar.model.ApiResult
 import hu.bme.aut.mycocktailbar.model.CocktailResult
-import hu.bme.aut.mycocktailbar.model.ResultModel
+import hu.bme.aut.mycocktailbar.data_layer.network.CocktailApi
 import retrofit2.Retrofit
 import retrofit2.Call
 import retrofit2.converter.moshi.MoshiConverterFactory
 import kotlin.concurrent.thread
-import kotlin.reflect.KFunction0
 
 class CocktailInteractor {
     private val cocktailApi: CocktailApi

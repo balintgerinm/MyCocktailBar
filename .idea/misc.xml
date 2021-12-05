@@ -7,7 +7,11 @@
         <entry key="..\:/MyCocktailBar/app/src/main/res/layout/activity_cocktaillist.xml" value="0.25" />
         <entry key="..\:/MyCocktailBar/app/src/main/res/layout/activity_networklist.xml" value="0.24583333333333332" />
         <entry key="..\:/MyCocktailBar/app/src/main/res/layout/dialog_search_cocktail.xml" value="0.1" />
-        <entry key="..\:/MyCocktailBar/app/src/main/res/layout/item_cocktail.xml" value="0.5" />
+        <entry key="..\:/MyCocktailBar/app/src/main/res/layout/fragment_cocktail_instruction.xml" value="0.33" />
+        <entry key="..\:/MyCocktailBar/app/src/main/res/layout/fragment_cocktail_main.xml" value="0.3029891304347826" />
+        <entry key="..\:/MyCocktailBar/app/src/main/res/layout/fragment_cocktailinstruction.xml" value="0.17395833333333333" />
+        <entry key="..\:/MyCocktailBar/app/src/main/res/layout/fragment_cocktailmain.xml" value="0.17395833333333333" />
+        <entry key="..\:/MyCocktailBar/app/src/main/res/layout/item_cocktail.xml" value="0.36363636363636365" />
       </map>
     </option>
   </component>

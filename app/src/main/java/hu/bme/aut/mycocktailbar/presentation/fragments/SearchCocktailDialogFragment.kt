@@ -1,4 +1,4 @@
-package hu.bme.aut.mycocktailbar.presentation.list
+package hu.bme.aut.mycocktailbar.presentation.fragments
 
 import android.app.Dialog
 import android.content.Context

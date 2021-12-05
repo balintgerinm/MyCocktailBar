@@ -1,4 +1,4 @@
-package hu.bme.aut.mycocktailbar.network
+package hu.bme.aut.mycocktailbar.data_layer.network
 
 import hu.bme.aut.mycocktailbar.model.ApiResult
 import hu.bme.aut.mycocktailbar.model.CocktailResult

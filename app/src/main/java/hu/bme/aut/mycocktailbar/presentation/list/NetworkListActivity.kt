@@ -1,13 +1,15 @@
 package hu.bme.aut.mycocktailbar.presentation.list
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import hu.bme.aut.mycocktailbar.databinding.ActivityCocktaillistBinding
 import hu.bme.aut.mycocktailbar.databinding.ActivityNetworklistBinding
 import hu.bme.aut.mycocktailbar.model.ApiResult
 import hu.bme.aut.mycocktailbar.model.ResultModel
-import hu.bme.aut.mycocktailbar.network.CocktailInteractor
+import hu.bme.aut.mycocktailbar.data_access.CocktailInteractor
+import hu.bme.aut.mycocktailbar.adapter.CocktailAdapter
+import hu.bme.aut.mycocktailbar.presentation.cocktail.CocktailActivity
 
 class NetworkListActivity: AppCompatActivity(),
     CocktailAdapter.OnCocktailSelectedListener {
@@ -55,6 +57,10 @@ class NetworkListActivity: AppCompatActivity(),
     }
 
     override fun onCocktailSelected(cocktail: ResultModel?) {
-
+        val showCocktailIntent = Intent()
+        showCocktailIntent.setClass(this@NetworkListActivity, CocktailActivity::class.java)
+        showCocktailIntent.putExtra(CocktailActivity.EXTRA_COCKTAIL_ID, cocktail?.cocktailId.toString())
+        showCocktailIntent.putExtra(CocktailActivity.EXTRA_COCKTAIL_NAME, cocktail?.name)
+        startActivity(showCocktailIntent)
     }
 }

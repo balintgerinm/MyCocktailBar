@@ -1,4 +1,4 @@
-package hu.bme.aut.mycocktailbar.presentation.list
+package hu.bme.aut.mycocktailbar.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -53,7 +53,6 @@ class CocktailAdapter(private val listener: OnCocktailSelectedListener)
 
         fun bind(newCocktail: ResultModel?) {
             item = newCocktail
-            // TODO bindings
             binding.CocktailItemNameTextView.text = newCocktail?.name
             Picasso.get().load(item?.imgUrl).into(binding.ivIcon)
         }

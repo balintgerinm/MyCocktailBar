@@ -13,13 +13,19 @@
         android:theme="@style/Theme.MyCocktailBar">
         <activity
             android:name=".presentation.cocktail.CocktailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:configChanges="keyboardHidden|orientation"/>
         <activity
             android:name=".presentation.list.NetworkListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="nosensor"
+            android:configChanges="keyboardHidden|orientation"/>
         <activity
             android:name=".presentation.list.CocktailListActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="nosensor"
+            android:configChanges="keyboardHidden|orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
