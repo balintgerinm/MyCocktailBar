@@ -1,8 +1,10 @@
 package hu.bme.aut.mycocktailbar.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import hu.bme.aut.mycocktailbar.R
@@ -36,8 +38,10 @@ class CocktailAdapter(private val listener: OnCocktailSelectedListener, private 
     override fun getItemCount(): Int = cocktails.size
 
     fun addCocktail(newCocktail: ResultModel) {
-        cocktails.add(newCocktail)
-        notifyItemInserted(cocktails.size - 1)
+        if(!cocktails.contains(newCocktail)) {
+            cocktails.add(newCocktail)
+            notifyItemInserted(cocktails.size - 1)
+        }
     }
 
     fun addFavorite(cocktail: CocktailModel) {
@@ -95,4 +99,5 @@ class CocktailAdapter(private val listener: OnCocktailSelectedListener, private 
             Picasso.get().load(item?.imgUrl).into(binding.ivIcon)
         }
     }
+
 }

@@ -20,7 +20,7 @@ class CocktailActivity : AppCompatActivity() {
 
     private lateinit var cocktailPagerAdapter: CocktailPagerAdapter
     private lateinit var interactor: CocktailInteractor
-    private lateinit var savedCocktail: CocktailResult
+    private var savedCocktail: CocktailResult? = null
     companion object {
         private const val TAG = "CocktailActivity"
         const val EXTRA_COCKTAIL_ID = "extra.cocktail_id"
@@ -43,7 +43,7 @@ class CocktailActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (savedCocktail.drinks.isEmpty()) {
+        if (savedCocktail == null) {
             loadCocktailData()
         }
         else {
@@ -57,17 +57,19 @@ class CocktailActivity : AppCompatActivity() {
         cocktailInteractor.getById(cocktailId , onSuccess = this::initFragments, onError = this::showError)
     }
 
-    private fun initFragments(data: CocktailResult) {
-        cocktail = data
-        cocktailPagerAdapter = CocktailPagerAdapter(cocktail.drinks[0],this)
-        binding.mainViewPager.adapter = cocktailPagerAdapter
-        TabLayoutMediator(binding.tabLayout, binding.mainViewPager) { tab, position ->
-            tab.text = when(position) {
-                0 -> getString(R.string.main)
-                1 -> getString(R.string.details)
-                else -> ""
-            }
-        }.attach()
+    private fun initFragments(data: CocktailResult?) {
+        if (data != null){
+            cocktail = data
+            cocktailPagerAdapter = CocktailPagerAdapter(cocktail.drinks[0],this)
+            binding.mainViewPager.adapter = cocktailPagerAdapter
+            TabLayoutMediator(binding.tabLayout, binding.mainViewPager) { tab, position ->
+                tab.text = when(position) {
+                    0 -> getString(R.string.main)
+                    1 -> getString(R.string.details)
+                    else -> ""
+                }
+            }.attach()
+        }
     }
 
     private fun showError(e: Throwable) {
